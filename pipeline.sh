@@ -37,9 +37,10 @@ EXIT_VALUE=0
 
 function install_prerequisites
 {
-    sudo apt-get -qq install "${INSTALL_PACKAGE}"
+    sudo apt-get install "${INSTALL_PACKAGE}"
+#    sudo apt-get -qq install "${INSTALL_PACKAGE}"
     TEST_COMMAND=$(which jq)
-echo "$TEST_COMMAND"
+echo "1 = $TEST_COMMAND"
 
     VERSION=$("${INSTALL_PACKAGE} " --version | sed 's/[^0-9.]*\([0-9.]*\).*/\1/')
     BANNER="Scanning all JSON with ${INSTALL_PACKAGE} (version: ${VERSION})"
@@ -55,7 +56,7 @@ function validate_json()
 {
     json_string=$1
 
-echo "$TEST_COMMAND"
+echo "2 = $TEST_COMMAND"
 
     if errors=$("${TEST_COMMAND}" . 2>&1 <<<"${json_string}"); then
         return 0
