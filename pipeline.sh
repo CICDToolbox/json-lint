@@ -54,7 +54,7 @@ function validate_json()
 {
     json_string=$1
 
-    if errors=$("${TEST_COMMAND}" . 2>&1 <<<"${json_string}"); then
+    if errors=$(${TEST_COMMAND} . 2>&1 <<<"${json_string}"); then
         return 0
     fi
     echo "${errors}"
