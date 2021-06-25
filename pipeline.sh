@@ -39,7 +39,7 @@ function install_prerequisites
 {
     sudo apt-get -qq install "${INSTALL_PACKAGE}"
 
-    VERSION=$("^${INSTALL_PACKAGE} " --version | sed 's/[^0-9.]*\([0-9.]*\).*/\1/')
+    VERSION=$("${INSTALL_PACKAGE} " --version | sed 's/[^0-9.]*\([0-9.]*\).*/\1/')
     BANNER="Scanning all JSON with ${INSTALL_PACKAGE} (version: ${VERSION})"
 }
 
