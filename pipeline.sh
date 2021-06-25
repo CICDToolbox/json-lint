@@ -42,7 +42,7 @@ function install_prerequisites
     TEST_COMMAND=$(which jq)
 echo "1 = $TEST_COMMAND"
 
-    VERSION=$("${INSTALL_PACKAGE} " --version | sed 's/[^0-9.]*\([0-9.]*\).*/\1/')
+    VERSION=$("${INSTALL_PACKAGE}" --version | sed 's/[^0-9.]*\([0-9.]*\).*/\1/')
     BANNER="Scanning all JSON with ${INSTALL_PACKAGE} (version: ${VERSION})"
 }
 
