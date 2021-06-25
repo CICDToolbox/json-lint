@@ -53,7 +53,7 @@ jobs:
     if: always()
     name: Slack Post Workflow Notification
     needs:
-      - build-testing:
+      - build-testing
       - awesomebot
       - shellcheck
       - yaml-lint

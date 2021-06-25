@@ -1,0 +1,45 @@
+matrix:
+  include:
+  - language: bash
+    name: Compatibility Test (travis-ci default)
+    os: linux
+    arch: arm64-graviton2
+    install:
+    - "./install.sh"
+    script:
+    - "./scan.sh"
+  - language: ruby
+    name: YAML Linting (rvm 3.0)
+    rvm: 3.0
+    before_install:
+    - git clone https://github.com/CICDToolbox/yaml-lint
+    install:
+    - "./yaml-lint/install.sh"
+    script:
+    - "./yaml-lint/scan.sh"
+  - language: bash
+    name: Shellcheck (Bash)
+    os: linux
+    arch: arm64-graviton2
+    before_install:
+    - git clone https://github.com/CICDToolbox/shellcheck
+    install:
+    - "./shellcheck/install.sh"
+    script:
+    - "./shellcheck/scan.sh"
+  - language: ruby
+    name: Link Checking (rvm 3.0)
+    rvm: 3.0
+    env:
+    - WHITELIST="https://img.shields.io"
+    - EXCLUDE_FILES="CHANGELOG.md"
+    before_install:
+    - git clone https://github.com/CICDToolbox/awesomebot
+    install:
+    - "./awesomebot/install.sh"
+    script:
+    - "./awesomebot/scan.sh"
+notifications:
+  email: false
+  slack:
+    secure: R9yoCEjZKRWq4jSD3/34tJKiMOS0PvYWeYfkeZtQan4ITZpgm1jkNENfCMAoPdhxkAWjJ14cLH4tpxupBEFMU1PNlK0t0jOTazwNne6afYOAJnR7cPRVKPNUl60qjOwJ8AIy+cuyi0hAIzaTWmoJvLSZizLHkUi6ya5ewzcA0tv7rAzIo0BhtpmpXWQkt34PycZXVBgC7WS+p6cqlGfdEKvyhlOS2u9JrCjxZZCipK1wGjaMIhNJhW9Dx2iy0tCOwL4KHNz5b5tWd5EF/CY+C/FNV/mGQCP78fwXSuUi+wUHbRY/QszLOBbwSTdGboQXe716Fd0vZLfnQDiXLXn5O5Mk5HFZ0w80MKQj66Mw6yPBUTe3/k58KuR/CGCnej1inAY3xmeWyIu+0jjokXkVOV2lCNKUvd2Z7baUeJGABU0C1U9mXlovpfMxwV90m+dYzLgV9+/fn8Kenss8XglmMhM5ZsK9ddlilZ6yeUCLSCe40ohiLw0gaj7Tlj2mUFNQpF4JuC0imawG6qQbOydHbe7f9BWFdm0CfyJLDQaG9+nDx7U58HK0oiADQz3TdLjAwGGsCpOgH7XQ0MlUDrSScCqUY3QxK9gACwy/DH9VQEEFKXDOHx+aE2AATLP2DPIVw9LdQGPcCNvU2tcstZVtrYDKUi+akC16qjShvsMqWf4=
