@@ -3,9 +3,11 @@ on: [push, pull_request]
     
 jobs:
   build-testing:
+    name: Local Build Test
     runs-on: ubuntu-latest
     steps:
-      - name: Local Build Test
+      - uses: actions/checkout@v2
+      - name: Run JSON Lint
         run: ./pipeline.sh
   awesomebot:
     name: Awesomebot tests
