@@ -40,7 +40,7 @@
 
 ## Overview
 
-A tool to check your json files in travis-ci pipelines using [jq](https://stedolan.github.io/jq/).
+A tool to check your JSON files in travis-ci pipelines using [jq](https://stedolan.github.io/jq/).
 
 > Also see: [validate-json](https://github.com/DevelopersToolbox/validate-json) for our bash plugin to do the same thing.
 
