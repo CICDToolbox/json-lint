@@ -24,7 +24,7 @@ set -Eeuo pipefail
 # -------------------------------------------------------------------------------- #
 
 INSTALL_PACKAGE='jq'
-TEST_COMMAND='puppet-lint'
+TEST_COMMAND='jq'
 FILE_TYPE_SEARCH_PATTERN='^JSON'
 FILE_NAME_SEARCH_PATTERN='\.json$'
 EXIT_VALUE=0
