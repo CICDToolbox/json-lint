@@ -57,10 +57,6 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
-    - name: Set up Ruby 3.0
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 3.0	
     - name: Run JSON Lint
       run: wget --quiet -O - https://raw.githubusercontent.com/CICDToolbox/json-lint/master/pipeline.sh | bash
 ```
@@ -68,9 +64,6 @@ jobs:
 ### Travis CI
 
 ```yml
-language: ruby
-rvm: 3.0
-
 script:
   - wget --quiet -O - https://raw.githubusercontent.com/CICDToolbox/json-lint/master/pipeline.sh | bash
 ```
@@ -104,9 +97,6 @@ jobs:
 #### Travis CI
 
 ```yml
-language: ruby
-rvm: 3.0
-
 env:
   - REPORT_ONLY=true
   - SHOW_ERRORS=true
