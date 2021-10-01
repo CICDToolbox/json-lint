@@ -44,7 +44,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     - name: Run JSON Lint
-      run: wget --quiet -O - https://raw.githubusercontent.com/CICDToolbox/json-lint/master/pipeline.sh | bash
+      run: bash <(curl -s https://raw.githubusercontent.com/CICDToolbox/json-lint/master/pipeline.sh)
 ```
 
 ### Other Options
