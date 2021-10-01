@@ -47,13 +47,18 @@ function install_prerequisites
 {
     stage "Install Prerequisites"
 
-    if errors=$( ${INSTALL_COMMAND} 2>&1 ); then
-        success "${INSTALL_COMMAND}"
-    else
-        fail "${INSTALL_COMMAND}" "${errors}" true
-        if [[ "${EXIT_ON_INSTALL_FAILURE}" == true ]]; then
-            exit $EXIT_VALUE
+    if ! command -v ${INSTALL_PACKAGE} &> /dev/null
+    then
+        if errors=$( ${INSTALL_COMMAND} 2>&1 ); then
+            success "${INSTALL_COMMAND}"
+        else
+            fail "${INSTALL_COMMAND}" "${errors}" true
+            if [[ "${EXIT_ON_INSTALL_FAILURE}" == true ]]; then
+                exit $EXIT_VALUE
+            fi
         fi
+    else
+        success "${INSTALL_PACKAGE} is alredy installed"
     fi
 }
 
