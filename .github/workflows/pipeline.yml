@@ -10,7 +10,7 @@ jobs:
       - name: Run JSON Lint
         run: ./pipeline.sh
   awesomebot:
-    name: Awesomebot tests
+    name: Awesomebot
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -18,21 +18,21 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.0
-      - name: Run Awesomebot tests
+      - name: Run Awesomebot
         env:
           FLAGS: "default"
           EXCLUDE_FILES: "CHANGELOG.md"
           WHITELIST: "https://img.shields.io"
-        run: wget --quiet -O - https://raw.githubusercontent.com/CICDToolbox/awesomebot/master/pipeline.sh | bash
+        run: bash <(curl -s https://raw.githubusercontent.com/CICDToolbox/awesomebot/master/pipeline.sh)
   shellcheck:
-    name: ShellCheck tests
+    name: ShellCheck
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Run Shellcheck tests
-        run: wget --quiet -O - https://raw.githubusercontent.com/CICDToolbox/shellcheck/master/pipeline.sh | bash
+      - name: Run Shellcheck
+        run: bash <(curl -s https://raw.githubusercontent.com/CICDToolbox/shellcheck/master/pipeline.sh)
   yaml-lint:
-    name: YAML Lint tests
+    name: YAML Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -40,8 +40,8 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.0
-      - name: Run YAML Lint tests
-        run: wget --quiet -O - https://raw.githubusercontent.com/CICDToolbox/yaml-lint/master/pipeline.sh | bash
+      - name: Run YAML-Lint
+        run: bash <(curl -s https://raw.githubusercontent.com/CICDToolbox/yaml-lint/master/pipeline.sh)
   slack-workflow-status:
     if: always()
     name: Slack Post Workflow Notification

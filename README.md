@@ -1,17 +1,10 @@
-<h1 align="center">
+<p align="center">
     <a href="https://github.com/WolfSoftware">
         <img src="https://raw.githubusercontent.com/WolfSoftware/branding/master/images/general/banners/64/black-and-white.png" alt="Wolf Software Logo" />
     </a>
     <br />
-    JSON Lint for CI/CD Pipelines
-</h1>
-
-<p align="center">
     <a href="https://github.com/CICDToolbox/json-lint/actions/workflows/pipeline.yml">
         <img src="https://img.shields.io/github/workflow/status/CICDToolbox/json-lint/pipeline/master?logo=github&logoColor=white&style=for-the-badge" alt="Github Build Status">
-    </a>
-    <a href="https://travis-ci.com/CICDToolbox/json-lint">
-        <img src="https://img.shields.io/travis/com/CICDToolbox/json-lint/master?style=for-the-badge&logo=travis" alt="Travis Build Status">
     </a>
     <a href="https://github.com/CICDToolbox/json-lint/releases/latest">
         <img src="https://img.shields.io/github/v/release/CICDToolbox/json-lint?color=blue&style=for-the-badge&logo=github&logoColor=white&label=Latest%20Release" alt="Release">
@@ -32,24 +25,17 @@
     <a href="https://github.com/CICDToolbox/json-lint/issues">
         <img src="https://img.shields.io/badge/Get%20Support-blue?style=for-the-badge&logo=read-the-docs&logoColor=white" />
     </a>
-    <br />
-    <a href="https://github.com/TGWolf">
-        <img src="https://img.shields.io/badge/Created%20by%20Wolf-black?style=for-the-badge" />
-    </a>
 </p>
 
 ## Overview
 
-A tool to check your JSON files in travis-ci pipelines using [jq](https://stedolan.github.io/jq/).
+A tool to check your JSON files in CI/CD pipelines using [jq](https://stedolan.github.io/jq/).
 
 > Also see: [validate-json](https://github.com/DevelopersToolbox/validate-json) for our bash plugin to do the same thing.
 
-This tool has been written and tested using both GitHub Actions and Travis CI, but it should work out of the box with a lot of other CI/CD tools.
+This tool has been written and tested using GitHub Actions but it should work out of the box with a lot of other CI/CD tools.
 
 ## Usage
-
-### GitHub Actions
-
 
 ```yml
 on: [push, pull_request]
@@ -61,25 +47,18 @@ jobs:
       run: wget --quiet -O - https://raw.githubusercontent.com/CICDToolbox/json-lint/master/pipeline.sh | bash
 ```
 
-### Travis CI
-
-```yml
-script:
-  - wget --quiet -O - https://raw.githubusercontent.com/CICDToolbox/json-lint/master/pipeline.sh | bash
-```
-
 ### Other Options
 
 The following environment variables can be set in order to customise the script.
 
-| Name          | Purpose |
-| ------------- | ------- |
-| REPORT_ONLY   | Generate the report but do not fail the build even if an error occurred. |
-| SHOW_ERRORS   | Show the actual errors instead of just which files had errors. |
+| Name          | Purpose | Default Value |
+| ------------- | ------- | ------------- |
+| EXCLUDE_FILES | A comma separated list of files to exclude from being scanned. | Unset |
+| EXIT_ON_INSTALL_FAILURE | Exit the script if the install of the prerequisites fails (they might already exist). | False |
+| REPORT_ONLY   | Generate the report but do not fail the build even if an error occurred. | False | 
+| SHOW_ERRORS   | Show the actual errors instead of just which files had errors. | False | 
 
 You can use any combination of the above settings.
-
-#### GitHub Actions
 
 ```yml
 on: [push, pull_request]
@@ -89,20 +68,10 @@ jobs:
     runs-on: ubuntu-latest
     - name: Run JSON Lint
       env:
+        EXIT_ON_INSTALL_FAILURE: true
         REPORT_ONLY: true
         SHOW_ERRORS: true
-      run: wget --quiet -O - https://raw.githubusercontent.com/CICDToolbox/json-lint/master/pipeline.sh | bash
-```
-
-#### Travis CI
-
-```yml
-env:
-  - REPORT_ONLY=true
-  - SHOW_ERRORS=true
-
-script:
-  - wget --quiet -O - https://raw.githubusercontent.com/CICDToolbox/json-lint/master/pipeline.sh | bash
+      run: bash <(curl -s https://raw.githubusercontent.com/CICDToolbox/json-lint/master/pipeline.sh)
 ```
 
 ## Example Output
@@ -131,10 +100,12 @@ AND
 [[ ${filename} =~ \.json$ ]]
 ```
 
-## Show Support
-
-<p>
-	<a href="https://ko-fi.com/wolfsoftware">
-		<img src="https://img.shields.io/badge/Ko%20Fi-blue?style=for-the-badge&logo=ko-fi&logoColor=white" />
-	</a>
+<p align="right">
+    <a href="https://github.com/TGWolf">
+        <img src="https://img.shields.io/badge/Created%20by%20Wolf-black?style=for-the-badge" />
+    </a>
+    <br />
+    <a href="https://ko-fi.com/wolfsoftware">
+        <img src="https://img.shields.io/badge/Ko%20Fi-black?style=for-the-badge&logo=ko-fi&logoColor=white" />
+    </a>
 </p>
