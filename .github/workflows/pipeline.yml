@@ -3,7 +3,7 @@ on: [push, pull_request]
     
 jobs:
   build-testing:
-    name: Local Build Test
+    name: Build test of JSON Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
