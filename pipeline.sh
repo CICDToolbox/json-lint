@@ -179,54 +179,37 @@ function scan_files()
 
 function handle_parameters
 {
+    local parameters=false
+
     stage "Parameters"
+
+    if [[ -n "${REPORT_ONLY-}" ]] && [[ "${REPORT_ONLY}" = true ]]; then
+        REPORT_ONLY=true
+        echo " Report Only: true"
+        parameters=true
+    else
+        REPORT_ONLY=false
+    fi
+
+    if [[ -n "${SHOW_ERRORS-}" ]] && [[ "${SHOW_ERRORS}" = true ]]; then
+        SHOW_ERRORS=true
+        echo " Show Errors: true"
+        parameters=true
+    else
+        SHOW_ERRORS=false
+    fi
 
     if [[ -n "${EXCLUDE_FILES-}" ]]; then
         IFS=',' read -r -a exclude_list <<< "${EXCLUDE_FILES}"
         echo " Excluded: ${EXCLUDE_FILES}"
+        parameters=true
     else
         # shellcheck disable=SC2034
         declare -a exclude_list=()
-        echo " Excluded: None"
     fi
 
-    if [[ -n "${EXIT_ON_INSTALL_FAILURE-}" ]]; then
-        if [[ "${EXIT_ON_INSTALL_FAILURE}" != true ]]; then
-            EXIT_ON_INSTALL_FAILURE=false
-            echo " Exit on Install Failure: false"
-        else
-            EXIT_ON_INSTALL_FAILURE=true
-            echo " Exit on Install Failure: true"
-        fi
-    else
-        EXIT_ON_INSTALL_FAILURE=false
-        echo " Exit on Install Failure: false"
-    fi
-
-    if [[ -n "${SHOW_ERRORS-}" ]]; then
-        if [[ "${SHOW_ERRORS}" != true ]]; then
-            SHOW_ERRORS=false
-            echo " Show Errors: false"
-        else
-            SHOW_ERRORS=true
-            echo " Show Errors: true"
-        fi
-    else
-        SHOW_ERRORS=false
-        echo " Show Errors: false"
-    fi
-
-    if [[ -n "${REPORT_ONLY-}" ]]; then
-        if [[ "${REPORT_ONLY}" != true ]]; then
-            REPORT_ONLY=false
-            echo " Report Only: false"
-        else
-            REPORT_ONLY=true
-            echo " Report Only: true"
-        fi
-    else
-        REPORT_ONLY=false
-        echo " Report Only: false"
+    if [[ "${parameters}" != true ]]; then
+        echo " No parameters given"
     fi
 }
 
