@@ -26,7 +26,7 @@ set -Eeuo pipefail
 # CURRENT_STAGE - The current stage used for the reporting output.                 #
 # -------------------------------------------------------------------------------- #
 
-INSTALL_PACKAGE='jq22'
+INSTALL_PACKAGE='jq'
 INSTALL_COMMAND="sudo apt-get -qq install ${INSTALL_PACKAGE}"
 
 TEST_COMMAND='jq'
