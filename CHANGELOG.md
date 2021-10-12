@@ -7,7 +7,9 @@ This changelog was automatically generated using [Caretaker](https://github.com/
 
 ### [Unreleased](https://github.com/CICDToolbox/json-lint/commits/master)
 
-- update [`[head]`](https://github.com/CICDToolbox/json-lint/commit/)
+- New logo [`[head]`](https://github.com/CICDToolbox/json-lint/commit/)
+
+- update [`[c0c13d9]`](https://github.com/CICDToolbox/json-lint/commit/c0c13d922fd9bb88f0c572b42c55393dcfb928dd)
 
 - update [`[30ef075]`](https://github.com/CICDToolbox/json-lint/commit/30ef075411a2412051399408de48967c83778f67)
 

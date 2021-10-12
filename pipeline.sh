@@ -17,7 +17,6 @@ set -Eeuo pipefail
 # -------------------------------------------------------------------------------- #
 # Global Variables                                                                 #
 # -------------------------------------------------------------------------------- #
-# INSTALL_PACKAGE - The name of the package to install.                            #
 # INSTALL_COMMAND - The command to execute to do the install.                      #
 # TEST_COMMAND - The command to execute to perform the test.                       #
 # FILE_TYPE_SEARCH_PATTERN - The pattern used to match file types.                 #
@@ -26,8 +25,7 @@ set -Eeuo pipefail
 # CURRENT_STAGE - The current stage used for the reporting output.                 #
 # -------------------------------------------------------------------------------- #
 
-INSTALL_PACKAGE='jq'
-INSTALL_COMMAND="sudo apt-get -qq install ${INSTALL_PACKAGE}"
+INSTALL_COMMAND="sudo apt-get -qq install jq"
 
 TEST_COMMAND='jq'
 FILE_TYPE_SEARCH_PATTERN='^JSON'
@@ -46,7 +44,7 @@ function install_prerequisites
 {
     stage "Install Prerequisites"
 
-    if ! command -v ${INSTALL_PACKAGE} &> /dev/null
+    if ! command -v ${TEST_COMMAND} &> /dev/null
     then
         if errors=$( ${INSTALL_COMMAND} 2>&1 ); then
             success "${INSTALL_COMMAND}"
@@ -55,7 +53,7 @@ function install_prerequisites
             exit $EXIT_VALUE
         fi
     else
-        success "${INSTALL_PACKAGE} is alredy installed"
+        success "${TEST_COMMAND} is alredy installed"
     fi
 }
 
@@ -67,8 +65,8 @@ function install_prerequisites
 
 function get_version_information
 {
-    VERSION=$("${INSTALL_PACKAGE}" --version | sed 's/[^0-9.]*\([0-9.]*\).*/\1/')
-    BANNER="Run ${INSTALL_PACKAGE} (v${VERSION})"
+    VERSION=$("${TEST_COMMAND}" --version | sed 's/[^0-9.]*\([0-9.]*\).*/\1/')
+    BANNER="Run ${TEST_COMMAND} (v${VERSION})"
 }
 
 # -------------------------------------------------------------------------------- #
