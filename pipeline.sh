@@ -25,7 +25,7 @@ set -Eeuo pipefail
 # CURRENT_STAGE - The current stage used for the reporting output.                 #
 # -------------------------------------------------------------------------------- #
 
-INSTALL_COMMAND="sudo apt-get -qq install jq"
+INSTALL_COMMAND="sudo apt-get -qq -y install jq"
 
 TEST_COMMAND='jq'
 FILE_TYPE_SEARCH_PATTERN='^JSON'
