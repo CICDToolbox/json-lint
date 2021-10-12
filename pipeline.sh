@@ -26,7 +26,7 @@ set -Eeuo pipefail
 # CURRENT_STAGE - The current stage used for the reporting output.                 #
 # -------------------------------------------------------------------------------- #
 
-INSTALL_PACKAGE='jq'
+INSTALL_PACKAGE='jq22'
 INSTALL_COMMAND="sudo apt-get -qq install ${INSTALL_PACKAGE}"
 
 TEST_COMMAND='jq'
@@ -35,7 +35,6 @@ FILE_NAME_SEARCH_PATTERN='\.json$'
 
 EXIT_VALUE=0
 CURRENT_STAGE=0
-
 
 # -------------------------------------------------------------------------------- #
 # Install                                                                          #
@@ -53,9 +52,7 @@ function install_prerequisites
             success "${INSTALL_COMMAND}"
         else
             fail "${INSTALL_COMMAND}" "${errors}" true
-            if [[ "${EXIT_ON_INSTALL_FAILURE}" == true ]]; then
-                exit $EXIT_VALUE
-            fi
+            exit $EXIT_VALUE
         fi
     else
         success "${INSTALL_PACKAGE} is alredy installed"
