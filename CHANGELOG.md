@@ -7,7 +7,9 @@ This changelog was automatically generated using [Caretaker](https://github.com/
 
 ### [Unreleased](https://github.com/CICDToolbox/json-lint/commits/master)
 
-- update [`[head]`](https://github.com/CICDToolbox/json-lint/commit/)
+- update readme [`[head]`](https://github.com/CICDToolbox/json-lint/commit/)
+
+- update [`[8c3c64b]`](https://github.com/CICDToolbox/json-lint/commit/8c3c64b2102cfbdce7bac6a54adad73b92d4b240)
 
 - update [`[1fe9771]`](https://github.com/CICDToolbox/json-lint/commit/1fe9771f9a0646192f72a51f4244eab2fe4cf1f7)
 

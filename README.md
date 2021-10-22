@@ -57,7 +57,7 @@ The following environment variables can be set in order to customise the script.
 
 | Name          | Purpose | Default Value |
 | ------------- | ------- | ------------- |
-| EXCLUDE_FILES | A comma separated list of files to exclude from being scanned. | Unset |
+| EXCLUDE_FILES | A comma separated list of files to exclude from being scanned. You can also use `regex` to do pattern matching. | Unset |
 | REPORT_ONLY   | Generate the report but do not fail the build even if an error occurred. | False | 
 | SHOW_ERRORS   | Show the actual errors instead of just which files had errors. | False | 
 

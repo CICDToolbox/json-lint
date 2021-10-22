@@ -141,7 +141,7 @@ function is_excluded()
     local needle=$1
 
     for i in "${exclude_list[@]}"; do
-        if [[ $i == "${needle}" ]]; then
+        if [[ "${needle}" =~ ${i} ]]; then
             return 0
         fi
     done
