@@ -168,7 +168,7 @@ function scan_files()
                 check "${filename}"
             fi
         fi
-    done < <(git ls-files | sort -zVd)
+    done < <(find -- * -type f | sort -zVd)
 }
 
 # -------------------------------------------------------------------------------- #
