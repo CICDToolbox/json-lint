@@ -9,6 +9,8 @@ This changelog was automatically generated using [Caretaker](https://github.com/
 
 - Fix find command [`[head]`](https://github.com/CICDToolbox/json-lint/commit/)
 
+- Fix find command [`[25d4220]`](https://github.com/CICDToolbox/json-lint/commit/25d4220b18d1efafbb2e63fae658005f385ba64c)
+
 - shellcheck [`[6193035]`](https://github.com/CICDToolbox/json-lint/commit/6193035e706d05c37ceea601ceab59e76277910f)
 
 - update readme [`[5246690]`](https://github.com/CICDToolbox/json-lint/commit/5246690b38f463bfc6de3a03383692f369ebeceb)
