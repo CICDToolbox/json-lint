@@ -53,7 +53,7 @@ function install_prerequisites
             exit $EXIT_VALUE
         fi
     else
-        success "${TEST_COMMAND} is alredy installed"
+        success "${TEST_COMMAND} is already installed"
     fi
 }
 
