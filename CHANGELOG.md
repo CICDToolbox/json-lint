@@ -7,7 +7,9 @@ This changelog was automatically generated using [Caretaker](https://github.com/
 
 ### [Unreleased](https://github.com/CICDToolbox/json-lint/commits/master)
 
-- Fix README and workflows [`[head]`](https://github.com/CICDToolbox/json-lint/commit/)
+- Cleanup [`[head]`](https://github.com/CICDToolbox/json-lint/commit/)
+
+- Fix README and workflows [`[79abcad]`](https://github.com/CICDToolbox/json-lint/commit/79abcad2a4772f5fc16ea564069750b6d88a0afa)
 
 - Add support for Bash 3 [`[c95d5fd]`](https://github.com/CICDToolbox/json-lint/commit/c95d5fd61e5a5bd21cb9fd58246161cd62842560)
 

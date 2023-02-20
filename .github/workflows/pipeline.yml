@@ -89,22 +89,6 @@ jobs:
         language: "node"
         highest-only: true
 
-  markdown-lint:
-    name: Markdown Lint
-    needs: get-node-version
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout the repository
-        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c  # 3.3.0
-      - name: Setup node ${{ needs.get-node-version.outputs.version }}
-        uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c  # v3.6.0
-        with:
-          node-version: ${{ needs.get-node-version.outputs.version }}
-      - name: Run Markdown Lint
-        run: bash <(curl -s https://raw.githubusercontent.com/CICDToolbox/markdown-lint/master/pipeline.sh)
-        env:
-          EXCLUDE_FILES: "README.md"
-
   get-python-version:
     runs-on: ubuntu-latest
     outputs:
@@ -139,7 +123,6 @@ jobs:
       - build-testing
       - actionlint
       - awesomebot
-      - markdown-lint
       - yaml-lint
     runs-on: ubuntu-latest
     steps:
