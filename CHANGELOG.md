@@ -7,7 +7,9 @@ This changelog was automatically generated using [Caretaker](https://github.com/
 
 ### [Unreleased](https://github.com/CICDToolbox/json-lint/commits/master)
 
-- Cleanup [`[head]`](https://github.com/CICDToolbox/json-lint/commit/)
+- remove-patch-version: true [`[head]`](https://github.com/CICDToolbox/json-lint/commit/)
+
+- Cleanup [`[25930fc]`](https://github.com/CICDToolbox/json-lint/commit/25930fcaab4f5e4181791c373c242270093990af)
 
 - Fix README and workflows [`[79abcad]`](https://github.com/CICDToolbox/json-lint/commit/79abcad2a4772f5fc16ea564069750b6d88a0afa)
 

@@ -29,11 +29,12 @@ jobs:
     outputs:
       version: ${{ steps.get-language-versions.outputs.latest-versions }}
     steps:
-    - uses: ActionsToolbox/get-language-versions-action@12914a844dfb5bfa53884aaa1f736f961325f113  # v0.1.0
+    - uses: ActionsToolbox/get-language-versions-action@295ca9f60e37bb4fc6e26bb7c16d3ff7d805f72d  # v0.1.1
       id: get-language-versions
       with:
         language: "go"
         highest-only: true
+        remove-patch-version: true
 
   actionlint:
     name: Action Lint
@@ -54,11 +55,12 @@ jobs:
     outputs:
       version: ${{ steps.get-language-versions.outputs.latest-versions }}
     steps:
-    - uses: ActionsToolbox/get-language-versions-action@12914a844dfb5bfa53884aaa1f736f961325f113  # v0.1.0
+    - uses: ActionsToolbox/get-language-versions-action@295ca9f60e37bb4fc6e26bb7c16d3ff7d805f72d  # v0.1.1
       id: get-language-versions
       with:
         language: "ruby"
         highest-only: true
+        remove-patch-version: true
 
   awesomebot:
     name: Awesomebot
@@ -83,22 +85,24 @@ jobs:
     outputs:
       version: ${{ steps.get-language-versions.outputs.latest-versions }}
     steps:
-    - uses: ActionsToolbox/get-language-versions-action@12914a844dfb5bfa53884aaa1f736f961325f113  # v0.1.0
+    - uses: ActionsToolbox/get-language-versions-action@295ca9f60e37bb4fc6e26bb7c16d3ff7d805f72d  # v0.1.1
       id: get-language-versions
       with:
         language: "node"
         highest-only: true
+        remove-patch-version: true
 
   get-python-version:
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.get-language-versions.outputs.latest-versions }}
     steps:
-    - uses: ActionsToolbox/get-language-versions-action@12914a844dfb5bfa53884aaa1f736f961325f113  # v0.1.0
+    - uses: ActionsToolbox/get-language-versions-action@295ca9f60e37bb4fc6e26bb7c16d3ff7d805f72d  # v0.1.1
       id: get-language-versions
       with:
         language: "python"
         highest-only: true
+        remove-patch-version: true
 
   yaml-lint:
     name: YAML Lint
