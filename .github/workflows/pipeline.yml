@@ -1,60 +1,153 @@
-name: pipeline
-on: [push, pull_request]
-    
+name: Repository Linting
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
+
+env:
+  SLACK_NOTIFY: true
+
+# Declare default permissions as read only.
+permissions: read-all
+
 jobs:
   build-testing:
     name: Build test of JSON Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout the repository
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c  # 3.3.0
       - name: Run JSON Lint
         run: ./pipeline.sh
-  awesomebot:
-    name: Awesomebot
+
+  get-go-version:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get-language-versions.outputs.latest-versions }}
+    steps:
+    - uses: ActionsToolbox/get-language-versions-action@12914a844dfb5bfa53884aaa1f736f961325f113  # v0.1.0
+      id: get-language-versions
+      with:
+        language: "go"
+        highest-only: true
+
+  actionlint:
+    name: Action Lint
+    needs: get-go-version
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Ruby 3.0
-        uses: ruby/setup-ruby@v1
+      - name: Checkout the repository
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c  # 3.3.0
+      - name: Setup Go ${{ needs.get-go-version.outputs.version }}
+        uses: actions/setup-go@6edd4406fa81c3da01a34fa6f6343087c207a568  # v3.5.0
         with:
-          ruby-version: 3.0
+          go-version: ${{ needs.get-go-version.outputs.version }}
+      - name: Run Action Lint
+        run: bash <(curl -s https://raw.githubusercontent.com/CICDToolbox/action-lint/master/pipeline.sh)
+
+  get-ruby-version:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get-language-versions.outputs.latest-versions }}
+    steps:
+    - uses: ActionsToolbox/get-language-versions-action@12914a844dfb5bfa53884aaa1f736f961325f113  # v0.1.0
+      id: get-language-versions
+      with:
+        language: "ruby"
+        highest-only: true
+
+  awesomebot:
+    name: Awesomebot
+    needs: get-ruby-version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c  # 3.3.0
+      - name: Set up Ruby ${{ needs.get-ruby-version.outputs.version }}
+        uses: ruby/setup-ruby@ee26e27437bde475b19a6bf8cb73c9fa658876a2  # 1.134.0
+        with:
+          ruby-version: ${{ needs.get-ruby-version.outputs.version }}
       - name: Run Awesomebot
         env:
           FLAGS: "default"
           EXCLUDE_FILES: "CHANGELOG.md"
           WHITELIST: "https://img.shields.io"
         run: bash <(curl -s https://raw.githubusercontent.com/CICDToolbox/awesomebot/master/pipeline.sh)
-  shellcheck:
-    name: ShellCheck
+
+  get-node-version:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get-language-versions.outputs.latest-versions }}
+    steps:
+    - uses: ActionsToolbox/get-language-versions-action@12914a844dfb5bfa53884aaa1f736f961325f113  # v0.1.0
+      id: get-language-versions
+      with:
+        language: "node"
+        highest-only: true
+
+  markdown-lint:
+    name: Markdown Lint
+    needs: get-node-version
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Run Shellcheck
-        run: bash <(curl -s https://raw.githubusercontent.com/CICDToolbox/shellcheck/master/pipeline.sh)
+      - name: Checkout the repository
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c  # 3.3.0
+      - name: Setup node ${{ needs.get-node-version.outputs.version }}
+        uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c  # v3.6.0
+        with:
+          node-version: ${{ needs.get-node-version.outputs.version }}
+      - name: Run Markdown Lint
+        run: bash <(curl -s https://raw.githubusercontent.com/CICDToolbox/markdown-lint/master/pipeline.sh)
+        env:
+          EXCLUDE_FILES: "README.md"
+
+  get-python-version:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get-language-versions.outputs.latest-versions }}
+    steps:
+    - uses: ActionsToolbox/get-language-versions-action@12914a844dfb5bfa53884aaa1f736f961325f113  # v0.1.0
+      id: get-language-versions
+      with:
+        language: "python"
+        highest-only: true
+
   yaml-lint:
     name: YAML Lint
+    needs: get-python-version
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Ruby 3.0
-        uses: ruby/setup-ruby@v1
+      - name: Checkout the repository
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c  # 3.3.0
+      - name: Set up Python ${{ needs.get-python-version.outputs.version }}
+        uses: actions/setup-python@d27e3f3d7c64b4bbf8e4abfb9b63b83e846e0435  # v4.5.0
         with:
-          ruby-version: 3.0
+          python-version: ${{ needs.get-python-version.outputs.version }}
       - name: Run YAML-Lint
+        env:
+          EXCLUDE_FILES: ".github/workflows"
         run: bash <(curl -s https://raw.githubusercontent.com/CICDToolbox/yaml-lint/master/pipeline.sh)
+
   slack-workflow-status:
     if: always()
     name: Slack Post Workflow Notification
     needs:
       - build-testing
+      - actionlint
       - awesomebot
-      - shellcheck
+      - markdown-lint
       - yaml-lint
     runs-on: ubuntu-latest
     steps:
-      - name: Slack Post Workflow Notification
-        uses: Gamesight/slack-workflow-status@master
+      - name: Slack Workflow Notifications
+        if: ${{ env.SLACK_NOTIFY == 'true' && github.event_name == 'push' }}
+        uses: Gamesight/slack-workflow-status@26a36836c887f260477432e4314ec3490a84f309  # v1.2.0
         with:
-          include_jobs: true
-          repo_token: ${{secrets.GITHUB_TOKEN}}
-          slack_webhook_url: ${{secrets.SLACK_WEBHOOK_URL}}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          include_jobs: on-failure
+          include_commit_message: true

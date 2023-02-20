@@ -7,7 +7,9 @@ This changelog was automatically generated using [Caretaker](https://github.com/
 
 ### [Unreleased](https://github.com/CICDToolbox/json-lint/commits/master)
 
-- Add support for Bash 3 [`[head]`](https://github.com/CICDToolbox/json-lint/commit/)
+- Fix README and workflows [`[head]`](https://github.com/CICDToolbox/json-lint/commit/)
+
+- Add support for Bash 3 [`[c95d5fd]`](https://github.com/CICDToolbox/json-lint/commit/c95d5fd61e5a5bd21cb9fd58246161cd62842560)
 
 - Change the logic for skipping and showing skipped files [`[cc23f39]`](https://github.com/CICDToolbox/json-lint/commit/cc23f393f1957f23a69c815fa880c2d5c4ab15d6)
 
