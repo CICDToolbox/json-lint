@@ -213,8 +213,12 @@ function handle_parameters
         echo " Excluded: ${EXCLUDE_FILES}"
         parameters=true
     else
-        # shellcheck disable=SC2034
-        declare -a exclude_list=()
+        if ((BASH_VERSINFO[0] < 4)); then
+            exclude_list=("")
+        else
+            # shellcheck disable=SC2034
+            declare -a exclude_list=()
+        fi
     fi
 
     if [[ "${parameters}" != true ]]; then
@@ -285,17 +289,6 @@ function skip()
             printf ' [ %s%sSkip%s ] Skipping %s\n' "${bold}" "${skipped}" "${normal}" "${message}"
         fi
     fi
-}
-
-# -------------------------------------------------------------------------------- #
-# Draw Line                                                                        #
-# -------------------------------------------------------------------------------- #
-# Draw a line on the screen. Part of the report generation.                        #
-# -------------------------------------------------------------------------------- #
-
-function draw_line
-{
-    printf '%*s\n' "${screen_width}" '' | tr ' ' -
 }
 
 # -------------------------------------------------------------------------------- #
